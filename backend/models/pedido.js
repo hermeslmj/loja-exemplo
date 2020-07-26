@@ -13,6 +13,10 @@ let schema = mongoose.Schema({
         type: String
     },
     Produtos: [{
+        IdProduto: {
+            type: String,
+            required: true
+        },
         Nome: {
             type: String,
             required: true
