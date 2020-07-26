@@ -41,7 +41,7 @@ let schema = mongoose.Schema({
         type: String,
         required: true
     }
-    
+
 });
 
 const clienteModel = mongoose.model('cliente', schema);
