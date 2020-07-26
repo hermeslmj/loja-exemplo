@@ -1,9 +1,12 @@
 const express = require('express');
+const controller = require('../../controllers/pedidos/controller');
 
-const pedidosRouter = express.Router();
+const PedidosRouter = express.Router();
 
-pedidosRouter.get('/', async(req, res) => {
-    res.send("router de pedidos funcionando");
-});
+PedidosRouter.get('/', controller.getAll);
+PedidosRouter.get('/:id', controller.getById);
+PedidosRouter.post('/', controller.create);
+PedidosRouter.put('/:id', controller.update);
+PedidosRouter.delete('/:id', controller.deleteById);
 
-module.exports = pedidosRouter;
+module.exports = PedidosRouter;
