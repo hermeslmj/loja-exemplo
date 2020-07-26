@@ -40,7 +40,7 @@ let schema = mongoose.Schema({
     Estado: {
         type: String,
         required: true
-    },
+    }
     
 });
 
