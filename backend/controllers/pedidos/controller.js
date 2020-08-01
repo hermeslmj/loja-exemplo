@@ -1,9 +1,9 @@
 const pedidosModel = require('../../models/pedido');
+const pedidosService = require('../../services/pedidos/services');
 
 const create = async (req, res) => {
     try {
-        const newPedido = new pedidosModel(req.body);
-        await newPedido.save();
+        const newPedido = pedidosService.create(req.body);
         res.send({ "sucesso": true, "mensagem": "Pedido cadastrado com sucesso", "dados": newPedido });
     } catch (error) {
         console.log(error);
@@ -14,7 +14,7 @@ const create = async (req, res) => {
 const update = async (req, res) => {
     try {
         const id = req.params.id;
-        const updatedPedido = await pedidosModel.findByIdAndUpdate(id, req.body, { new: true });
+        const updatedPedido = await pedidosService.update(id, req.body);
         if (updatedPedido) {
             res.send({ "sucesso": true, "mensagem": "Pedido atualizado com sucesso", "dados": updatedPedido });
         }
@@ -41,9 +41,9 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
     try {
         const id = req.params.id;
-        const Pedido = await pedidosModel.findById(id);
-        if (Pedido) {
-            res.send(Pedido);
+        const pedido = await pedidosService.getById(id);
+        if (pedido) {
+            res.send(pedido);
         }
         else {
             res.status(404).send({ "sucesso": false, "mensagem": `Não foi possível localizar Pedido com o ${id}` });
@@ -58,9 +58,13 @@ const getById = async (req, res) => {
 const deleteById = async (req, res) => {
     try {
         const id = req.params.id;
-        await pedidosModel.findByIdAndRemove(id);
-        res.send({ "sucesso": true, "mensagem": "Pedido apagado com sucesso" });
-
+        const pedidoApagado = await pedidosService.deleteById(id);
+        if(pedidoApagado) {
+            res.send({ "sucesso": true, "mensagem": "Pedido apagado com sucesso" });
+        }
+        else {
+            res.status(404).send({ "sucesso": false, "mensagem": `Não possível apagar o clienet id ${id}` });
+        }
     } catch (error) {
         console.log({ "sucesso": false, "mensagem": `Não possível apagar o clienet id ${id}` });
         res.status(500).send(error);
