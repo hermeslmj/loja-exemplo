@@ -1,25 +1,32 @@
 const produtosModel = require('../../models/produto');
+const produtosService = require('../../services/produtos/services');
+const services = require('../../services/produtos/services');
 
 const create = async (req, res) => {
     try {
-        const newProduto = new produtosModel(req.body);
-        await newProduto.save();
-        res.send({ "sucesso": true, "mensagem": "Produto criado com sucesso", "dados": newProduto });
+        const newProduto = await produtosService.create(req.body);
+        if (newProduto) {
+            res.send({ "sucesso": true, "mensagem": "Produto criado com sucesso", "dados": newProduto });
+        }
+        else {
+            res.status(500).send({ "sucesso": false, "mensagem": "Não foi possível criar o produto", "dados": newProduto });
+        }
+
     } catch (error) {
         console.log(error);
-        res.status(500).send(error);
+        res.status(500).send({ "sucesso": false, "mensagem": "Não foi possível criar o produto", "dados": error });
     }
 }
 
 const update = async (req, res) => {
     try {
         const id = req.params.id;
-        const updatedProduct = await produtosModel.findByIdAndUpdate(id, req.body, { new: true });
+        const updatedProduct = await produtosService.update(id, req.body);
         if (updatedProduct) {
             res.send({ "sucesso": true, "mensagem": "Produto atualizado com sucesso", "dados": updatedProduct });
         }
         else {
-            res.status(404).send(`Não foi possível atualizar o produto ${id}`);
+            res.status(404).send({ "sucesso": false, "mensagem": `Não foi possível atualizar o produto ${id}`, "dados": updatedProduct });
         }
 
     } catch (error) {
