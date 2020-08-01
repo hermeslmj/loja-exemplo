@@ -22,5 +22,45 @@ const update = async (id, dados) => {
     }
 }
 
+const getAll = async () => {
+    try {
+        const listaProdutos = await produtosModel.find();
+        return listaProdutos;
+    } catch (error) {
+        throw error;
+    }
+}
 
-module.exports = { create, update }
+const getById = async (id) => {
+    try {
+        const produto = await produtosModel.findById(id);
+        if (produto) {
+            return produto
+        }
+        else {
+            return null;
+        }
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+const deleteById = async (id) => {
+    try {
+        const produtoApagado = await produtosModel.findByIdAndRemove(id);
+        if(produtoApagado){
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports = { create, update, getAll, getById, deleteById }

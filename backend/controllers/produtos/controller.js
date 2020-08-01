@@ -37,10 +37,9 @@ const update = async (req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        const listaProdutos = await produtosModel.find();
+        const listaProdutos = await produtosService.getAll();
         res.send(listaProdutos);
     } catch (error) {
-        console.log(error);
         res.status(500).send(error);
     }
 }
@@ -48,7 +47,7 @@ const getAll = async (req, res) => {
 const getById = async (req, res) => {
     try {
         const id = req.params.id;
-        const produto = await produtosModel.findById(id);
+        const produto = await produtosService.getById(id);
         if (produto) {
             res.send(produto);
         }
@@ -65,8 +64,14 @@ const getById = async (req, res) => {
 const deleteById = async (req, res) => {
     try {
         const id = req.params.id;
-        await produtosModel.findByIdAndRemove(id);
-        res.send({ "sucesso": true, "mensagem": "Produto apagado com sucesso" });
+        const result = await produtosModel.findByIdAndRemove(id);
+        if(result) {
+            res.send({ "sucesso": true, "mensagem": "Produto apagado com sucesso" });
+        }
+        else{
+            res.status(404).send({ "sucesso": false, "mensagem": `Não possível apagar o produto id ${id}` });    
+        }
+
 
     } catch (error) {
         console.log({ "sucesso": false, "mensagem": `Não possível apagar o produto id ${id}` });
