@@ -25,7 +25,7 @@ let schema = mongoose.Schema({
         type: String,
         required: true
     },
-    Numbero: {
+    Numero: {
         type: String,
         required: true
     },
