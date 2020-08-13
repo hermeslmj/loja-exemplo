@@ -16,8 +16,8 @@ let options = {
           title: 'Swagger',
           version: '1.0.0',
       },
-      host: 'localhost:3001',
-      basePath: '/',
+      host: 'https://api-loja-exemplo.herokuapp.com/',
+      basePath: '/api',
       produces: [
           "application/json",
           "application/xml"
