@@ -22,7 +22,7 @@ let options = {
           "application/json",
           "application/xml"
       ],
-      schemes: ['http', 'https']
+      schemes: ['https']
   },
   basedir: __dirname, //app absolute path
   files: ['./routes/**/*.js'] //Path to the API handle folder
