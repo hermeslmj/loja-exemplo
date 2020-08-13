@@ -1,5 +1,5 @@
 {
-  "name": "bootcamp-full-stack-desafio-final",
+  "name": "api-loja-exemplo",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -18,13 +18,7 @@
   },
   "scripts": {
     "server": "nodemon index.js",
-    "start": "node index.js",
-    "heroku-postbuild": "cd ../frontend && npm install && npm run build"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "../frontend/"
-    ]
+    "start": "node backend/index.js"
   },
   "engines": {
     "node": "13.14.0"
