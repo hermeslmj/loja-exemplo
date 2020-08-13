@@ -4,6 +4,21 @@ const controller = require('../../controllers/clientes/controller');
 const clientesRouter = express.Router();
 
 /**
+ * @typedef cliente
+ * @property {string} Nome.required
+ * @property {string} Telefone.required
+ * @property {string} Email.required
+ * @property {string} Senha.required
+ * @property {string} Cep.required
+ * @property {string} Rua.required
+ * @property {string} Numero.required
+ * @property {string} Complemento.required
+ * @property {string} Cidade.required
+ * @property {string} Estado.required
+ */
+
+
+/**
  * Função que retorna todos os clientes cadastrados na base de dados
  * @route GET /api/cliente
  * @group Clientes - Endpoints para manipulação de cliente
@@ -23,19 +38,7 @@ clientesRouter.get('/', controller.getAll);
  */
 clientesRouter.get('/:id', controller.getById);
 
-/**
- * @typedef cliente
- * @property {string} Nome.required
- * @property {string} Telefone.required
- * @property {string} Email.required
- * @property {string} Senha.required
- * @property {string} Cep.required
- * @property {string} Rua.required
- * @property {string} Numero.required
- * @property {string} Complemento.required
- * @property {string} Cidade.required
- * @property {string} Estado.required
- */
+
 
 /**
  * Retorna um cliente pesquisando pelo ID dele

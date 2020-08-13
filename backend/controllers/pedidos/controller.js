@@ -71,7 +71,7 @@ const deleteById = async (req, res) => {
         }
         else {
             logManager.logger.error(`DELETE /pedido/${id} - ${JSON.stringify({ "sucesso": false, "mensagem": `Não possível apagar o clienet id ${id}` })}`);
-            res.status(404).send({ "sucesso": false, "mensagem": `Não possível apagar o clienet id ${id}` });
+            res.status(404).send({ "sucesso": false, "mensagem": `Não possível apagar o pedido id ${id}` });
         }
     } catch (error) {
         logManager.logger.error(`DELETE /pedido/${id} - ${JSON.stringify(error)}`);
