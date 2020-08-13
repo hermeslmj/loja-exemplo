@@ -4,9 +4,31 @@ const mongoose = require('mongoose');
 const path = require('path');
 const dotenv = require('dotenv');
 
+
 const produtosRouter = require('./routes/produtos/routes');
 const clientesRouter = require('./routes/clientes/routes');
 const pedidosRouter = require('./routes/pedidos/routes');
+
+let options = {
+  swaggerDefinition: {
+      info: {
+          description: 'This is a sample server',
+          title: 'Swagger',
+          version: '1.0.0',
+      },
+      host: 'localhost:3001',
+      basePath: '/',
+      produces: [
+          "application/json",
+          "application/xml"
+      ],
+      schemes: ['http', 'https']
+  },
+  basedir: __dirname, //app absolute path
+  files: ['./routes/**/*.js'] //Path to the API handle folder
+};
+
+
 
 /**
  * Faz a leitura do arquivo
@@ -15,6 +37,7 @@ const pedidosRouter = require('./routes/pedidos/routes');
 dotenv.config();
 
 const app = express();
+const expressSwagger = require('express-swagger-generator')(app);
 app.use(cors(
   /*{
     origin: "http://financeiro-desafio-final.herokuapp.com"
@@ -72,6 +95,7 @@ connection.once('open', () => {
   connectedToMongoDB = true;
   console.log('Conectado ao MongoDB');
 
+  expressSwagger(options);
   /**
    * Definição de porta e
    * inicialização do app
