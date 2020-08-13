@@ -18,8 +18,7 @@
   },
   "scripts": {
     "server": "nodemon index.js",
-    "heroku-prebuild": "cd backend && npm install",
-    "start": "cd backend && node index.js"
+    "start": "node index.js"
   },
   "engines": {
     "node": "13.14.0"
