@@ -105,3 +105,5 @@ connection.once('open', () => {
     console.log(`Servidor iniciado na porta ${APP_PORT}`);
   });
 });
+
+module.exports = app;
