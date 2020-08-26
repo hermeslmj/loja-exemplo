@@ -12,8 +12,8 @@ const pedidosRouter = require('./routes/pedidos/routes');
 let options = {
   swaggerDefinition: {
       info: {
-          description: 'This is a sample server',
-          title: 'Swagger',
+          description: 'API que simula uma loja virtual simples para fins de estudos.',
+          title: 'Loja Exemplo',
           version: '1.0.0',
       },
       host: 'api-loja-exemplo.herokuapp.com',
