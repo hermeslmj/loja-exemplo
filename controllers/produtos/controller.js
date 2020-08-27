@@ -74,7 +74,8 @@ const getById = async (req, res) => {
 const deleteById = async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await produtosModel.findByIdAndRemove(id);
+        
+        const result = await produtosService.deleteById(id);
         if (result) {
             logManager.logger.info(`GET - /produto/${id} - ${JSON.stringify({ "sucesso": true, "mensagem": "Produto apagado com sucesso" })}`);
             res.send({ "sucesso": true, "mensagem": "Produto apagado com sucesso" });
